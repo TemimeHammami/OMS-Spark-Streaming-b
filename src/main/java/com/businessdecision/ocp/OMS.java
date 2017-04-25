@@ -55,16 +55,15 @@ public final class  OMS {
             System.exit(1);
         }
 
+        Class.forName("com.mysql.jdbc.Driver");
 
         Map<String, String> options = new HashMap<String, String>();
         options.put("driver", DRIVER);
         options.put("url", URL);
         options.put("dbtable",
                 "(select idAlert from Alert) as idAlert");
-        options.put("partitionColumn", "idAlert");
         options.put("lowerBound", "10001");
         options.put("upperBound", "499999");
-        options.put("numPartitions", "10");
 
         //Load MySQL query result as DataFrame
         DataFrame jdbcDF = sqlContext.load("jdbc", options);
