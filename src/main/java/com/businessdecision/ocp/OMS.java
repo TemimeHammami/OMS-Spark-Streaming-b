@@ -73,16 +73,16 @@ public final class  OMS {
 
 
 
-        {
-            
+
+
         List<Row> idAlertRows = jdbcDF.collectAsList();
 
             for (Row idAlertRow : idAlertRows) {
                 LOGGER.info(idAlertRow);
-                jdbcDF.show();
+
 
             }
-        }
+
                     String brokers = args[0];
             String topics = args[1];
 
@@ -139,7 +139,7 @@ public final class  OMS {
                 }
             });
             lines.print();
-
+        jdbcDF.show();
             //JavaRDD mysql = new JdbcRDD<String>();
 
             jssc.start();
