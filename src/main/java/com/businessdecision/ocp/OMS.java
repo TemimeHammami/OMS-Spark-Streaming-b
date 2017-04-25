@@ -72,17 +72,15 @@ public final class  OMS {
         DataFrame jdbcDF = sqlContext.load("jdbc", options);
 
 
-        int a = 1, b = 15;
-        while (a < b)
-        {
-            System.out.println("coucou " +a+ " fois !!");
 
+        {
+            
         List<Row> idAlertRows = jdbcDF.collectAsList();
 
             for (Row idAlertRow : idAlertRows) {
                 LOGGER.info(idAlertRow);
                 jdbcDF.show();
-                
+
             }
         }
                     String brokers = args[0];
