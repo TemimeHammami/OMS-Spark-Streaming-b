@@ -21,8 +21,6 @@ import org.apache.spark.api.java.function.Function;
 import org.apache.spark.streaming.kafka.KafkaUtils;
 import kafka.serializer.StringDecoder;
 import com.mysql.jdbc.*;
-import java.sql.*;
-
 
 /**
  * Created by Moncef.Bettaieb on 19/04/2017.
@@ -47,14 +45,16 @@ public final class OMS {
 
 
         JavaSparkContext sc =
-                new JavaSparkContext(new SparkConf().setAppName("Spark Example").setMaster("local[*]"));
+                new JavaSparkContext(new SparkConf().setAppName("Spark Example"));
         SQLContext sqlContext = new SQLContext(sc);
         Class.forName("com.mysql.jdbc.Driver");
+
         Map<String, String> options = new HashMap<String, String>();
         options.put("driver", DRIVER);
         options.put("url", URL + "?user=" + USERNAME + "&password=" + PASSWORD);
         options.put("dbtable", "Alert");
-        DataFrame df = sqlContext
+
+        final DataFrame df = sqlContext
                 .read()
                 .format("jdbc")
                 .options(options)
@@ -62,12 +62,13 @@ public final class OMS {
 
 // Looks the schema of this DataFrame.
         df.printSchema();
+        df.show();
 
         String brokers = args[0];
         String topics = args[1];
 
-        SparkConf sparkConf = new SparkConf().setAppName("OMS Maintenance Spark Streaming");
-        JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, Durations.seconds(5));
+        //SparkConf sparkConf = new SparkConf().setAppName("OMS Maintenance Spark Streaming");
+        JavaStreamingContext jssc = new JavaStreamingContext(sc, Durations.seconds(5));
 
         HashSet<String> topicsSet = new HashSet<String>(Arrays.asList(topics.split(",")));
         HashMap<String, String> kafkaParams = new HashMap<String, String>();
@@ -85,6 +86,7 @@ public final class OMS {
 
         JavaDStream<String> lines = messages.map(new Function<Tuple2<String, String>, String>() {
             public String call(Tuple2<String, String> tuple2) {
+                df.show();
                 try {
                     JSONObject obj = new JSONObject(tuple2._2());
                     String status = obj.getString("status");
