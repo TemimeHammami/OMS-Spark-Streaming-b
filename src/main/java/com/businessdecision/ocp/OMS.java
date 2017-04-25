@@ -61,6 +61,7 @@ public final class OMS {
                 .load();
 
 // Looks the schema of this DataFrame.
+        df.cache();
         df.printSchema();
         df.show();
 
