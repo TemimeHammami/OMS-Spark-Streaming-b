@@ -63,6 +63,9 @@ public final class OMS {
 // Looks the schema of this DataFrame.
         df.cache();
         df.show();
+        df.cache();
+
+        df.show();
 
         String brokers = args[0];
         String topics = args[1];
