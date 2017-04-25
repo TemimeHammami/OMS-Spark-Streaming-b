@@ -61,7 +61,7 @@ public final class  OMS {
         options.put("driver", DRIVER);
         options.put("url", URL);
         options.put("dbtable",
-                "(select emp_no, concat_ws(' ', first_name, last_name) as full_name from employees) as employees_name");
+                "(select idAlert, concat_ws(' ', idAlert, idPom) as full_name from Alert) as Alert_name");
         options.put("partitionColumn", "emp_no");
         options.put("lowerBound", "10001");
         options.put("upperBound", "499999");
