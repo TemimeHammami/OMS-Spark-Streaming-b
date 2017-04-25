@@ -71,16 +71,17 @@ public final class  OMS {
         //Load MySQL query result as DataFrame
         DataFrame jdbcDF = sqlContext.load("jdbc", options);
 
-        jdbcDF.cache();
-        jdbcDF.show();
-        jdbcDF.collect();
+
 
         List<Row> idAlertRows = jdbcDF.collectAsList();
 
         for (Row idAlertRow : idAlertRows) {
             LOGGER.info(idAlertRow);
 
-
+            jdbcDF.cache();
+            jdbcDF.show();
+            jdbcDF.collect();
+            
             String brokers = args[0];
             String topics = args[1];
 
