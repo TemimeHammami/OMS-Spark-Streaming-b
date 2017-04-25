@@ -68,6 +68,7 @@ public final class  OMS {
 
         jdbcDF.cache();
         jdbcDF.show();
+        jdbcDF.collect();
 
         List<Row> idAlertRows = jdbcDF.collectAsList();
 
