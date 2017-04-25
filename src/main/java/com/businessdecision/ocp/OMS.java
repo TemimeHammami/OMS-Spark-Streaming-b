@@ -62,7 +62,7 @@ public final class  OMS {
         options.put("url", URL);
         options.put("dbtable",
                 "(select idAlert, concat_ws(' ', idAlert, idPom) as full_name from Alert) as Alert_name");
-        options.put("partitionColumn", "emp_no");
+        options.put("partitionColumn", "idAlert");
         options.put("lowerBound", "10001");
         options.put("upperBound", "499999");
         options.put("numPartitions", "10");
