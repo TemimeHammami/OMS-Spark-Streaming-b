@@ -74,7 +74,7 @@ public final class  OMS {
 
 
         List<Row> idAlertRows = jdbcDF.collectAsList();
-
+        jdbcDF.cache();
         for (Row idAlertRow : idAlertRows) {
             LOGGER.info(idAlertRow);
             jdbcDF.show();
