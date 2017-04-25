@@ -60,13 +60,12 @@ public final class  OMS {
         Map<String, String> options = new HashMap<String, String>();
         options.put("driver", DRIVER);
         options.put("url", URL);
-        options.put("dbtable",
-                "(select idAlert from Alert) as idAlert");
-        options.put("lowerBound", "10001");
-        options.put("upperBound", "499999");
+        options.put("dbtable",  "Alert");
+
 
         //Load MySQL query result as DataFrame
         DataFrame jdbcDF = sqlContext.load("jdbc", options);
+
 
         List<Row> idAlertRows = jdbcDF.collectAsList();
 
