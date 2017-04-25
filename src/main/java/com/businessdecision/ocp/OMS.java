@@ -66,7 +66,9 @@ public final class  OMS {
         //Load MySQL query result as DataFrame
         DataFrame jdbcDF = sqlContext.load("jdbc", options);
 
+        jdbcDF.cache();
         jdbcDF.show();
+
         List<Row> idAlertRows = jdbcDF.collectAsList();
 
         for (Row idAlertRow : idAlertRows) {
