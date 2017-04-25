@@ -60,7 +60,12 @@ public final class  OMS {
         Map<String, String> options = new HashMap<String, String>();
         options.put("driver", DRIVER);
         options.put("url", URL);
-        options.put("dbtable",  "Alert");
+        options.put("dbtable",
+                "(select emp_no, concat_ws(' ', first_name, last_name) as full_name from employees) as employees_name");
+        options.put("partitionColumn", "emp_no");
+        options.put("lowerBound", "10001");
+        options.put("upperBound", "499999");
+        options.put("numPartitions", "10");
 
 
         //Load MySQL query result as DataFrame
