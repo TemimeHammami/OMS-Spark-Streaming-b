@@ -72,12 +72,12 @@ public final class  OMS {
         DataFrame jdbcDF = sqlContext.load("jdbc", options);
 
 
-        jdbcDF.show();
 
         List<Row> idAlertRows = jdbcDF.collectAsList();
 
         for (Row idAlertRow : idAlertRows) {
             LOGGER.info(idAlertRow);
+            jdbcDF.show();
 
         }
 
