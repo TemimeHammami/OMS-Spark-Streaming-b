@@ -72,16 +72,20 @@ public final class  OMS {
         DataFrame jdbcDF = sqlContext.load("jdbc", options);
 
 
+        int a = 1, b = 15;
+        while (a < b)
+        {
+            System.out.println("coucou " +a+ " fois !!");
 
         List<Row> idAlertRows = jdbcDF.collectAsList();
-        jdbcDF.cache();
-        for (Row idAlertRow : idAlertRows) {
-            LOGGER.info(idAlertRow);
-            jdbcDF.show();
 
+            for (Row idAlertRow : idAlertRows) {
+                LOGGER.info(idAlertRow);
+                jdbcDF.show();
+                
+            }
         }
-
-            String brokers = args[0];
+                    String brokers = args[0];
             String topics = args[1];
 
             //SparkConf sparkConf = new SparkConf().setAppName("OMS Maintenance Spark Streaming");
