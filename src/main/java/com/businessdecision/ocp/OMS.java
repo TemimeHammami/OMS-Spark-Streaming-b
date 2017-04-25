@@ -136,7 +136,6 @@ public final class  OMS {
                     }
                 }
             });
-            lines.print();
 
             //JavaRDD mysql = new JdbcRDD<String>();
 
